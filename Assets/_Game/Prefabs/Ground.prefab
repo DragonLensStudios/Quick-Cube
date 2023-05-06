@@ -136,8 +136,8 @@ GameObject:
   - component: {fileID: 6499654928679307674}
   - component: {fileID: 6499654928679307673}
   - component: {fileID: 6499654928679307672}
-  - component: {fileID: 1936470194734808670}
   - component: {fileID: 1321902417467510070}
+  - component: {fileID: 6216420052882471093}
   m_Layer: 6
   m_Name: Ground
   m_TagString: Untagged
@@ -229,20 +229,6 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
---- !u!64 &1936470194734808670
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6499654928679307679}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 1
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!114 &1321902417467510070
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -265,8 +251,21 @@ MonoBehaviour:
   - {fileID: 3238739979118720756}
   - {fileID: 1536973159598365590}
   minSpawnItems: 0
-  maxSpawnItems: 5
+  maxSpawnItems: 0
   spawnedItems: []
+--- !u!65 &6216420052882471093
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6499654928679307679}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 10, y: 5, z: 8}
+  m_Center: {x: 0, y: 2.5, z: 4}
 --- !u!1 &6834117799817343329
 GameObject:
   m_ObjectHideFlags: 0

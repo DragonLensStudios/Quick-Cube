@@ -226,7 +226,8 @@ MonoBehaviour:
   mapSpawnPrefab: {fileID: 6499654928679307679, guid: b92a306d18ba3b640a241192e948fe22,
     type: 3}
   spawnDistance: 5
-  maxSpawnPoolSize: 20
+  baseSpawnPoolSize: 3
+  maxSpawnPoolSize: 5
   spawnedMapObjects: []
 --- !u!4 &140773558
 Transform:
@@ -279,7 +280,7 @@ MonoBehaviour:
   username: Mony
   coins: 0
   score: 0
-  moveSpeed: 3
+  moveSpeed: 8
   jumpForce: 5
   moveDistance: 0
   groundLayer:

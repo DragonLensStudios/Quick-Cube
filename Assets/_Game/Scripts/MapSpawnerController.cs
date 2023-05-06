@@ -8,10 +8,12 @@ using UnityEngine.Pool;
 public class MapSpawnerController : MonoBehaviour
 {
     public static Action<GameObject> onMapSpawn;
-    
+    public static Action<GameObject> onMapDespawn;
+
     [SerializeField] private GameObject mapSpawnPrefab;
     [SerializeField] private float spawnDistance = 5f;
     [SerializeField] private IObjectPool<GameObject> mapSpawnPool;
+    [SerializeField] private int baseSpawnPoolSize = 5;
     [SerializeField] private int maxSpawnPoolSize = 20;
     [SerializeField] private List<GameObject> spawnedMapObjects = new();
 
@@ -33,14 +35,19 @@ public class MapSpawnerController : MonoBehaviour
         {
             if (mapSpawnPool == null)
             {
-                mapSpawnPool = new ObjectPool<GameObject>(CreateMapSpawnItem, OnTakeFromPool, OnReturnedToPool,
-                    OnDestroyPoolObject, true, maxSpawnPoolSize);
+                mapSpawnPool = new ObjectPool<GameObject>(CreateMapSpawnItem, OnTakeFromPool, OnReturnedToPool, OnDestroyPoolObject,
+                    true, baseSpawnPoolSize, maxSpawnPoolSize);
             }
 
             return mapSpawnPool;
         }
     }
-
+    public int BaseSpawnPoolSize
+    {
+        get => baseSpawnPoolSize;
+        set => baseSpawnPoolSize = value;
+    }
+    
     public int MaxSpawnPoolSize
     {
         get => maxSpawnPoolSize;
@@ -64,11 +71,14 @@ public class MapSpawnerController : MonoBehaviour
     public void OnEnable()
     {
         onMapSpawn += OnMapSpawn;
+        onMapDespawn += OnMapDespawn;
     }
 
     public void OnDisable()
     {
         onMapSpawn -= OnMapSpawn;
+        onMapDespawn -= OnMapDespawn;
+
     }
 
     private void OnDestroyPoolObject(GameObject obj)
@@ -80,13 +90,13 @@ public class MapSpawnerController : MonoBehaviour
     private void OnReturnedToPool(GameObject obj)
     {
         obj.SetActive(false);
-        spawnedMapObjects.Remove(obj);
     }
 
     private void OnTakeFromPool(GameObject obj)
     {
         obj.SetActive(true);
-        var lastMapObject = spawnedMapObjects.LastOrDefault();
+        
+        var lastMapObject = spawnedMapObjects.OrderByDescending(x=>x.transform.position.z).First();
         if (lastMapObject != null)
         {
             obj.transform.position = new Vector3(0, 0, lastMapObject.transform.position.z + spawnDistance);
@@ -95,23 +105,20 @@ public class MapSpawnerController : MonoBehaviour
         {
             obj.transform.position = Vector3.zero;
         }
-
-        if (!spawnedMapObjects.Contains(obj))
-        {
-            spawnedMapObjects.Add(obj);
-        }
-
-
+        
     }
 
     private GameObject CreateMapSpawnItem()
     {
         var go = Instantiate(mapSpawnPrefab, transform);
         var count = spawnedMapObjects.Count();
-        var lastMapObject = spawnedMapObjects.LastOrDefault();
-        if (lastMapObject != null)
+        if (count > 0)
         {
-            go.transform.position = new Vector3(0, 0, lastMapObject.transform.position.z + spawnDistance);
+            var lastMapObject = spawnedMapObjects.OrderByDescending(x=>x.transform.position.z).First();
+            if (lastMapObject != null)
+            {
+                go.transform.position = new Vector3(0, 0, lastMapObject.transform.position.z + spawnDistance);
+            }    
         }
         else
         {
@@ -130,8 +137,18 @@ public class MapSpawnerController : MonoBehaviour
         MapSpawnPool.Get();
     }
     
+    private void OnMapDespawn(GameObject obj)
+    {
+        MapSpawnPool.Release(obj);
+    }
+    
     public static void SpawnMap(GameObject obj)
     {
         onMapSpawn?.Invoke(obj);
+    }
+
+    public static void DespawnMap(GameObject obj)
+    {
+        onMapDespawn?.Invoke(obj);
     }
 }

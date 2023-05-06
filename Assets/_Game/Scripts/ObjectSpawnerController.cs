@@ -38,4 +38,12 @@ public class ObjectSpawnerController : MonoBehaviour
             MapSpawnerController.SpawnMap(gameObject);
         }
     }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            MapSpawnerController.DespawnMap(gameObject);
+        }
+    }
 }
