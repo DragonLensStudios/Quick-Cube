@@ -18,7 +18,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private int moveDistance;
     [SerializeField] private LayerMask groundLayer;
     [SerializeField] private float groundDistance = 0.55f;
-
+    [SerializeField] private Vector3 leftBoundary, rightBoundary;
+    
     private Vector3 startPosition;
     private Vector2 movement;
     private bool isGrounded;
@@ -147,7 +148,14 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
-        transform.position += new Vector3(movement.x * moveSpeed , transform.position.y, moveSpeed) * Time.deltaTime;
+        var newPos = new Vector3(movement.x * moveSpeed, transform.position.y, moveSpeed);
+        var clampedX = Mathf.Clamp(newPos.x, leftBoundary.x, rightBoundary.x);
+        
+        if (transform.position.x <= rightBoundary.x && transform.position.x >= leftBoundary.x)
+        {
+            transform.position += new Vector3(clampedX, newPos.y, newPos.z) * Time.deltaTime;
+            transform.position = new Vector3(Mathf.Clamp(transform.position.x, leftBoundary.x, rightBoundary.x), transform.position.y, transform.position.z);
+        }
         Vector3 delta = transform.position - startPosition;
         moveDistance = (int)delta.magnitude;
     }
