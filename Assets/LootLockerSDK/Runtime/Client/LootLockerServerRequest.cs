@@ -1,9 +1,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System;
-using Unity.Plastic.Newtonsoft.Json;
 using LootLocker.LootLockerEnums;
-using Unity.Plastic.Newtonsoft.Json.Serialization;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Serialization;
+using Formatting = Newtonsoft.Json.Formatting;
+using JsonConvert = Newtonsoft.Json.JsonConvert;
+using JsonSerializerSettings = Newtonsoft.Json.JsonSerializerSettings;
 #if UNITY_EDITOR
 using UnityEditor;
 #endif

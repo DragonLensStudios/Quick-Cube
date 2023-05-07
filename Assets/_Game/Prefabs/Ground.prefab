@@ -243,15 +243,26 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   objectPrefabs:
   - {fileID: 2904847647526829054, guid: ecfdc0639f84c9349b1312c87f2c33fa, type: 3}
+  - {fileID: 2904847647526829054, guid: ecfdc0639f84c9349b1312c87f2c33fa, type: 3}
+  - {fileID: 2904847647526829054, guid: ecfdc0639f84c9349b1312c87f2c33fa, type: 3}
+  - {fileID: 2904847647526829054, guid: ecfdc0639f84c9349b1312c87f2c33fa, type: 3}
+  - {fileID: 2904847647526829054, guid: ecfdc0639f84c9349b1312c87f2c33fa, type: 3}
   - {fileID: 2904847647526829054, guid: 8cd15f564fe86be4b9b23b86c64b50f5, type: 3}
+  - {fileID: 2904847647526829054, guid: 8cd15f564fe86be4b9b23b86c64b50f5, type: 3}
+  - {fileID: 2904847647526829054, guid: 8cd15f564fe86be4b9b23b86c64b50f5, type: 3}
+  - {fileID: 2904847647526829054, guid: 8cd15f564fe86be4b9b23b86c64b50f5, type: 3}
+  - {fileID: 2904847647526829054, guid: 8cd15f564fe86be4b9b23b86c64b50f5, type: 3}
+  - {fileID: 2904847647526829054, guid: e6a28b96287d1494d8538d7e2652d08e, type: 3}
+  - {fileID: 2904847647526829054, guid: 546e55acff17fe143852b81856280cd8, type: 3}
   spawnPositions:
   - {fileID: 2833069478675671427}
   - {fileID: 2918010811215089345}
   - {fileID: 6863073762774177563}
   - {fileID: 3238739979118720756}
   - {fileID: 1536973159598365590}
+  usedPositions: []
   minSpawnItems: 0
-  maxSpawnItems: 0
+  maxSpawnItems: 5
   spawnedItems: []
 --- !u!65 &6216420052882471093
 BoxCollider:
@@ -265,7 +276,7 @@ BoxCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 10, y: 5, z: 8}
-  m_Center: {x: 0, y: 2.5, z: 4}
+  m_Center: {x: 0, y: 2.5, z: 7}
 --- !u!1 &6834117799817343329
 GameObject:
   m_ObjectHideFlags: 0

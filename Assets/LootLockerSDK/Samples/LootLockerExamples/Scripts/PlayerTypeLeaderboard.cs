@@ -9,6 +9,7 @@ namespace LootLocker {
 public class PlayerTypeLeaderboard : MonoBehaviour
 {
     public InputField scoreInputField;
+    public InputField nameInputField;
     public Text infoText;
     public Text playerIDText;
     public Text leaderboardTop10Text;
@@ -19,7 +20,7 @@ public class PlayerTypeLeaderboard : MonoBehaviour
     * leaderboardKey can be the same between stage and live /development mode on/off.
     * So if you use the key instead of the ID, you don't need to change any code when switching development_mode.
     */
-    string leaderboardKey = "genericLeaderboard";
+    string leaderboardKey = "highscores";
     // int leaderboardID = 4705;
 
     string memberID;
@@ -30,7 +31,7 @@ public class PlayerTypeLeaderboard : MonoBehaviour
         /* 
          * Override settings to use the Example game setup
          */
-        LootLockerSettingsOverrider.OverrideSettings();
+        //LootLockerSettingsOverrider.OverrideSettings();
         StartGuestSession();
     }
 
@@ -128,7 +129,7 @@ public class PlayerTypeLeaderboard : MonoBehaviour
                             }
 
                             leaderboardText += currentEntry.rank + ".";
-                            leaderboardText += currentEntry.player.id;
+                            leaderboardText += currentEntry.player.name;
                             leaderboardText += " - ";
                             leaderboardText += currentEntry.score;
                             leaderboardText += " - ";
@@ -175,7 +176,7 @@ public class PlayerTypeLeaderboard : MonoBehaviour
                 {
                     LootLockerLeaderboardMember currentEntry = response.items[i];
                     leaderboardText += currentEntry.rank + ".";
-                    leaderboardText += currentEntry.player.id;
+                    leaderboardText += currentEntry.player.name;
                     leaderboardText += " - ";
                     leaderboardText += currentEntry.score;
                     leaderboardText += " - ";
@@ -187,6 +188,30 @@ public class PlayerTypeLeaderboard : MonoBehaviour
             else
             {
                 infoText.text = "Error updating Top 10 leaderboard";
+            }
+        });
+    }
+    public void ChangePlayerName(string name)
+    {
+        LootLockerSDKManager.SetPlayerName(name + $"#{memberID}", (response) =>
+        {
+            if (response.success)
+            {
+                Debug.Log("Player name successfully set to " + response.name);
+            }
+            else
+            {
+                Debug.Log("Failed to set player name");
+            }
+        });
+    }
+    public void SetInitialPlayerName()
+    {
+        LootLockerSDKManager.GetPlayerName((response) =>
+        {
+            if (response.success)
+            {
+                nameInputField.text = response.name;
             }
         });
     }

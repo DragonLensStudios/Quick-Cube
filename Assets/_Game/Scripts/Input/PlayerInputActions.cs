@@ -181,17 +181,6 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""61fcf4a0-4125-49df-a6eb-a90f296ca23d"",
-                    ""path"": ""<Touchscreen>/primaryTouch/delta"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Touch"",
-                    ""action"": ""Move"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
                     ""id"": ""7598c5cd-d17a-4305-8ecc-d83e30911be5"",
                     ""path"": ""<Gamepad>/buttonSouth"",
                     ""interactions"": """",
